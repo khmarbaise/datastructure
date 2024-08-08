@@ -8,6 +8,9 @@ import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 import java.util.stream.Collectors;
 
+/**
+ * @author Karl Heinz Marbaise
+ */
 public class DataStructure {
   private final Map<ProductId, ProductData> products;
   private final Map<ProductCategoryId, Set<ProductId>> categoryIndex;

@@ -11,6 +11,9 @@ import java.util.stream.LongStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+/**
+ * @author Karl Heinz Marbaise
+ */
 class DataStructureTest {
 
   private DataStructure dataStructure;
