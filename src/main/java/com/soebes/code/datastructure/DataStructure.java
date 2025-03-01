@@ -2,6 +2,7 @@ package com.soebes.code.datastructure;
 
 import java.util.HashSet;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.locks.ReadWriteLock;
@@ -41,11 +42,11 @@ public class DataStructure {
     }
   }
 
-  public ProductData removeProduct(ProductData productData) {
+  public Optional<ProductData> removeProduct(ProductData productData) {
     readWriteLock.writeLock().lock();
     try {
-      var removedProduct = products.remove(productData.productId());
-      removedProduct.categories().forEach(prod -> categoryIndex.remove(prod.id()));
+      var removedProduct = Optional.ofNullable(products.remove(productData.productId()));
+      removedProduct.ifPresent(tpr -> tpr.categories().forEach(prod -> categoryIndex.remove(prod.id())));
       return removedProduct;
     } finally {
       readWriteLock.writeLock().unlock();
