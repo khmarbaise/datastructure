@@ -81,7 +81,7 @@ class DataStructureTest {
     dataStructure.addProduct(p2);
     dataStructure.addProduct(p3);
 
-    assertThat(dataStructure.removeProduct(p3)).isEqualTo(p3);
+    assertThat(dataStructure.removeProduct(p3)).hasValue(p3);
 
     assertThat(dataStructure.getProducts()).containsExactly(Map.entry(p1.productId(), p1), Map.entry(p2.productId(), p2));
 
