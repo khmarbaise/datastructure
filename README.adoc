@@ -27,5 +27,5 @@ Product and Product categories.
 == Requirements
 
 * Maven 3.9.8+
-* JDK22+ (build and runtime.)
+* JDK23+ (build and runtime.)
 
