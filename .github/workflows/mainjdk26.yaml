@@ -35,8 +35,8 @@ jobs:
         uses: oracle-actions/setup-java@v1
         with:
           website: jdk.java.net
-          release: EA
-          version: 26
+          release: 26-ea
+          version: latest
       - name: Set up Maven
         uses: stCarolas/setup-maven@v5
         with:
