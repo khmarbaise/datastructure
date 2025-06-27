@@ -32,39 +32,42 @@ public class DataStructure {
   }
 
   public ProductData addProduct(ProductData productData) {
-    readWriteLock.writeLock().lock();
+    var lock = readWriteLock.writeLock();
     try {
+      lock.lock();
       var result = products.putIfAbsent(productData.productId(), productData);
       productData.categories().forEach(pc -> categoryIndex.computeIfAbsent(pc.id(), k -> new HashSet<>()).add(productData.productId()));
       return result;
     } finally {
-      readWriteLock.writeLock().unlock();
+      lock.unlock();
     }
   }
 
   public Optional<ProductData> removeProduct(ProductData productData) {
-    readWriteLock.writeLock().lock();
+    var lock = readWriteLock.writeLock();
     try {
+      lock.lock();
       var removedProduct = Optional.ofNullable(products.remove(productData.productId()));
       removedProduct.ifPresent(tpr -> tpr.categories().forEach(prod -> categoryIndex.remove(prod.id())));
       return removedProduct;
     } finally {
-      readWriteLock.writeLock().unlock();
+      lock.unlock();
     }
   }
 
   public Set<ProductId> productIdsByCategory(ProductCategory category) {
-    readWriteLock.readLock().lock();
+    var lock = readWriteLock.readLock();
     try {
+      lock.lock();
       return this.categoryIndex.getOrDefault(category.id(), Set.of());
     } finally {
-      readWriteLock.readLock().unlock();
+      lock.unlock();
     }
   }
 
   public Set<ProductData> productsByCategory(ProductCategory category) {
-    readWriteLock.readLock().lock();
     try {
+      readWriteLock.readLock().lock();
       return this.categoryIndex.getOrDefault(category.id(), Set.of()).stream()
           .map(products::get)
           .collect(Collectors.toSet());
