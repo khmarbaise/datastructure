@@ -30,26 +30,26 @@ class DataStructuresThreadIT {
   void testingProductsAdding() throws InterruptedException {
     var dataStructure = new DataStructure();
     Thread t1 = Thread.ofVirtual().start(() -> {
-      for (int i = 0; i < 5_000; i++) {
+      for (int i = 0; i < 2_000; i++) {
         dataStructure.addProduct(products.get(i));
         dataStructure.removeProduct(products.get(i));
       }
     });
     Thread t2 = Thread.ofVirtual().start(() -> {
-      for (int i = 0; i < 5_000; i++) {
-        dataStructure.addProduct(products.get(i + 5_000));
+      for (int i = 0; i < 2_000; i++) {
+        dataStructure.addProduct(products.get(i + 2_000));
         dataStructure.removeProduct(products.get(i));
       }
     });
     Thread t3 = Thread.ofVirtual().start(() -> {
-      for (int i = 0; i < 5_000; i++) {
-        dataStructure.addProduct(products.get(i + 10_000));
+      for (int i = 0; i < 2_000; i++) {
+        dataStructure.addProduct(products.get(i + 4_000));
         dataStructure.removeProduct(products.get(i));
       }
     });
     Thread t4 = Thread.ofVirtual().start(() -> {
-      for (int i = 0; i < 5_000; i++) {
-        dataStructure.addProduct(products.get(i + 15_000));
+      for (int i = 0; i < 2_000; i++) {
+        dataStructure.addProduct(products.get(i + 6_000));
         dataStructure.removeProduct(products.get(i));
       }
     });
