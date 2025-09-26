@@ -30,7 +30,7 @@ jobs:
     name: Linux
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: 'Set up JDK 26'
         uses: oracle-actions/setup-java@v1
         with:
